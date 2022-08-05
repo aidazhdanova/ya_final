@@ -110,18 +110,17 @@ class PostsFormTest(TestCase):
         comment = Comment.objects.latest('id')
         self.assertEqual(Comment.objects.count(), comments_count + 1)
         self.assertEqual(comment.text, form_data['text'])
-        self.assertEqual(comment.author, self.user)
         self.assertEqual(comment.post_id, self.post.id)
+        self.assertEqual(comment.author, self.user)
         self.assertRedirects(response, reverse(
             'posts:post_detail', args=[self.post.id]))
 
-    def test_guest_user_create_comment(self):
+    def test_guest_client_create_comment(self):
         """Проверка создания коммента неавторизированным пользователем."""
-        comments_count = Comment.objects.count()
+        cmnt_count = Comment.objects.count()
         post = Post.objects.create(
             author=self.user,
-            text='Текст',
-        )
+            text='Текст')
         form_data = {'text': 'Тестовый комментарий'}
         response = self.guest_client.post(
             reverse(
@@ -131,6 +130,6 @@ class PostsFormTest(TestCase):
             data=form_data)
         redirect = reverse('login') + '?next=' + reverse(
             'posts:add_comment', kwargs={'post_id': post.id})
-        self.assertEqual(Comment.objects.count(), comments_count)
+        self.assertEqual(Comment.objects.count(), cmnt_count)
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertRedirects(response, redirect)

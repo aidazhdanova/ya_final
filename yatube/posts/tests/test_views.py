@@ -227,7 +227,7 @@ class FollowViewsTest(TestCase):
             reverse('posts:follow_index'))
         self.assertIn(post, response.context['page_obj'].object_list)
 
-    def test_notfollow_authors(self):
+    def test_not_follow_authors(self):
         """Проверка записей у тех кто не подписан на автора."""
         post = Post.objects.create(
             author=self.author,
