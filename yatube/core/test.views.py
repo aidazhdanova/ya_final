@@ -1,9 +1,9 @@
 from http import HTTPStatus
-
 from django.test import Client, TestCase
 
 
 class ViewTestClass(TestCase):
+    """Cтраница 404 отдаёт кастомный шаблон."""
     def setUp(self):
         self.client = Client()
 
