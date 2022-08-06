@@ -99,7 +99,7 @@ class PostsFormTest(TestCase):
 
     def test_authorized_user_create_comment(self):
         """Проверка создания коммента авторизированным пользователем."""
-        comments_count = Comment.objects.count()
+        cmnt_count = Comment.objects.count()
         form_data = {'text': 'Тестовый коментарий'}
         response = self.authorized_client.post(
             reverse('posts:add_comment', args=[
@@ -108,7 +108,7 @@ class PostsFormTest(TestCase):
             follow=True
         )
         comment = Comment.objects.latest('id')
-        self.assertEqual(Comment.objects.count(), comments_count + 1)
+        self.assertEqual(Comment.objects.count(), cmnt_count + 1)
         self.assertEqual(comment.text, form_data['text'])
         self.assertEqual(comment.post_id, self.post.id)
         self.assertEqual(comment.author, self.user)
