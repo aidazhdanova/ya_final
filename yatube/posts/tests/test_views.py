@@ -48,7 +48,7 @@ class PostsViewsTests(TestCase):
     def tearDownClass(cls):
         super().tearDownClass()
         shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
-             
+
     def setUp(self):
         self.authorized_client = Client()
         cache.clear()
@@ -201,7 +201,6 @@ class FollowViewsTest(TestCase):
         self.assertEqual(Follow.objects.count(), cnt_follow + 1)
         self.assertEqual(follow.user_id, self.author.id)
         self.assertEqual(follow.author_id, self.follower.id)
-        
 
     def test_unfollow_user(self):
         """Проверка возможности отписки от пользователя."""
