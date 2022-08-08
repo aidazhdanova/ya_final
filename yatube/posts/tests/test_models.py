@@ -22,12 +22,11 @@ class PostModelTest(TestCase):
             group=cls.group,
         )
 
-    def test_models_have_correct_object_names(self):
-        """Проверка вывода вводного текста до 15 символов."""
-        post = PostModelTest.post
-        self.assertEqual(str(post), post.text[:15])
-
-    def test_models_name_title_field_group(self):
-        """Проверка наличия поля title в модели данных группы."""
-        group = PostModelTest.group
-        self.assertEquals(group.title, str(group))
+    def test_post_models(self):
+        test_dict = {
+            str(self.group): self.group.title,
+            str(self.post): self.post.text[:15],
+        }
+        for value, expected in test_dict.items():
+            with self.subTest(value=value):
+                self.assertEqual(value, expected)

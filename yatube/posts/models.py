@@ -49,7 +49,7 @@ class Post(models.Model):
         verbose_name = 'Пост'
 
     def __str__(self):
-        return self.text
+        return self.text[:15]
 
 
 class Comment(models.Model):
@@ -73,6 +73,11 @@ class Comment(models.Model):
         'Дата публикации',
         auto_now_add=True
     )
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name_plural = 'Коментарии'
+        verbose_name = 'Коментарий'
 
     def __str__(self):
         return self.text[:15]

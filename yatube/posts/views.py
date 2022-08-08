@@ -49,7 +49,7 @@ def profile(request, username):
 def post_detail(request, post_id):
     """Показываем пост"""
     post = get_object_or_404(Post, id=post_id)
-    comments = post.comments.all()
+    comments = post.comments.select_related('author')
     form = CommentForm()
     return render(request, 'posts/post_detail.html', {
         'post': post,
