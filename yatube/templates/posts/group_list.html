@@ -16,7 +16,7 @@
         <p class="card-text">
           {{ post.text|linebreaksbr }}
         </p>
-        <a href="{% url 'posts:post_detail' post.id %}" class="btn btn-primary">Перейти в пост</a> 
+        <a href="{% url 'posts:post_detail' post.id %}" class="btn btn-outline-dark">Перейти в пост</a> 
 	<hr>
   {%endfor%}
   {% include 'posts/includes/paginator.html' with page=page_obj %}

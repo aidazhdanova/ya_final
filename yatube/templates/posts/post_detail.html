@@ -45,7 +45,6 @@
             <p class="card-text">
               {{ post.text|linebreaksbr }}
             </p>
-            <a href="{% url 'posts:post_detail' post.id %}" class="btn btn-primary">Подробная информация</a> 
             {% include 'comment.html' with post=post %}
             <div class="d-flex justify-content-between align-items-center">
               {% if user == post.author %}
